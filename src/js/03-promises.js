@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const form = document.querySelector('.form');
-console.log(form);
+
 
 form.addEventListener('submit', onFormSubmit);
 
@@ -10,6 +10,10 @@ form.addEventListener('submit', onFormSubmit);
 function onFormSubmit (event) {
   event.preventDefault();
   const { delay, step, amount } = form;
+
+  if (delay.value < 0 || step.value < 0) {
+    return Notify.warning(`Enter positive value, please!`)
+  }
 
   setTimeout(() => {
     for (let i = 0; i < amount.value; i += 1) {
